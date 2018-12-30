@@ -1,3 +1,6 @@
 sekigae
 tsubmodule
 /dist/
+bin/colc
+tests/tcolc
+tests/tcombinator
