@@ -20,6 +20,9 @@ let
   binbin = &"{binDir}/{packageName}"
   distDir = "dist"
 
+task buildjs, "JSをビルドする":
+  exec &"nimble js -o:static/js/{packageName}.js src/{packageName}.nim"
+
 task run, "バイナリをビルドする":
   exec "nimble build"
   exec binbin
