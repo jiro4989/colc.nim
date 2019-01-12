@@ -47,5 +47,7 @@ suite "calcCLCode1Time":
 suite "calcCLCode":
   test "計算する":
     check("xz(yz)" == "Sxyz".calcCLCode(cs))
-  test "2回目は計算されない":
+  test "2回目も計算される":
     check("z" == "SKIz".calcCLCode(cs))
+  test "未定義コンビネータならそのまま返す":
+    check("xyz" == "xyz".calcCLCode(cs))
