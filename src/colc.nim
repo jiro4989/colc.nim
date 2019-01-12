@@ -14,7 +14,7 @@ let cs = [
 
 proc getTextValue(id: cstring): cstring {.importc.}
 
-proc calc(e: Event) =
+proc calc(e: Event) {.exportc.} =
     let clcode = $"inputCLCode".getTextValue
     let calcResult = clcode.takePrefixCombinator(cs)
     resultArea.value = calcResult
