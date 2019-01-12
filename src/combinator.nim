@@ -27,7 +27,7 @@ proc takePrefixCombinator*(code: string, cs: openArray[Combinator]): string =
   for c in cs:
     if code.startsWith c.name:
       return c.name
-  return code[0 ..< 1]
+  return $code[0]
 
 proc takeCombinator(code: string, cs: openArray[Combinator]): tuple[combinator: string, args: seq[string], suffix: string] =
   let
