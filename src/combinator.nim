@@ -27,7 +27,7 @@ proc takePrefixCombinator*(code: string, cs: openArray[Combinator]): string =
   for c in cs:
     if code.startsWith c.name:
       return c.name
-  return code.substr 1
+  return code[0 ..< 1]
 
 proc takeCombinator(code: string, cs: openArray[Combinator]): tuple[combinator: string, args: seq[string], suffix: string] =
   let
@@ -43,14 +43,14 @@ proc takeCombinator(code: string, cs: openArray[Combinator]): tuple[combinator: 
   for i in 1..co.argsCount:
     let c = code2.takePrefixCombinator cs
     if c == "":
-      return (pref, @[], code2[pref.len .. code2.len-1])
+      return (pref, @[], code2.substr pref.len)
     args.add c
     code2 = code2[c.len .. code2.len-1]
 
   let joined = pref & args.join("")
-  return (pref, args, code[0 .. joined.len-1])
+  return (pref, args, code.substr joined.len)
 
-proc calc(co: Combinator, args: openArray[string]): string =
+proc calcFormat(co: Combinator, args: openArray[string]): string =
   result = co.format
   for i in 0..<co.argsCount:
     let f = "{" & $i & "}"
@@ -61,9 +61,9 @@ proc calcCLCode1Time(code: string, cs: openArray[Combinator]): string =
     coTuple = code.takeCombinator cs
     matched = cs.filterIt(it.name == coTuple.combinator)
   if matched.len < 1:
-    return
+    return code
   let co = matched[0]
-  result = co.calc coTuple.args
+  result = co.calcFormat coTuple.args
 
 proc calcCLCode*(code: string, cs: openArray[Combinator], n: int = -1): string =
   var m = n
@@ -73,5 +73,5 @@ proc calcCLCode*(code: string, cs: openArray[Combinator], n: int = -1): string =
     dec m
   let ret = code.calcCLCode1Time cs
   if code == ret:
-    return
-  result = ret.calcCLCode cs
+    return code
+  result = ret.calcCLCode(cs, m)
