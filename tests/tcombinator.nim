@@ -35,10 +35,16 @@ suite "calcFormat":
   test "置換処理を実行する":
     check("xz(yz)" == cs[0].calcFormat(["x", "y", "z"]))
     check("(abc)(ghi)((def)(ghi))" == cs[0].calcFormat(["(abc)", "(def)", "(ghi)"]))
+  test "コンビネータの引数が不足していると、そのまま返す":
+    check("Sx" == cs[0].calcFormat(["x"]))
+    let args: seq[string] = @[]
+    check("S" == cs[0].calcFormat(args))
 
 suite "calcCLCode1Time":
   test "1回だけ計算する":
     check("xz(yz)" == "Sxyz".calcCLCode1Time(cs))
+  test "余っていた引数は末尾に付与される":
+    check("xz(yz)A" == "SxyzA".calcCLCode1Time(cs))
   test "2回目は計算されない":
     check("Kz(Iz)" == "SKIz".calcCLCode1Time(cs))
   test "未定義コンビネータならそのまま返す":
@@ -47,7 +53,22 @@ suite "calcCLCode1Time":
 suite "calcCLCode":
   test "計算する":
     check("xz(yz)" == "Sxyz".calcCLCode(cs))
-  test "2回目も計算される":
+    check("xz(yz)A" == "SxyzA".calcCLCode(cs))
+  test "回数指定で計算する":
+    check("KI(II)" == "SKII".calcCLCode(cs, 1))
+    check("I" == "SKII".calcCLCode(cs, 2))
+    check("I" == "SKII".calcCLCode(cs, 3))
+  test "2回目以降も計算される":
     check("z" == "SKIz".calcCLCode(cs))
+    check("SKISxyz" == "SKISxyz".calcCLCode(cs, 0))
+    check("KS(IS)xyz" == "SKISxyz".calcCLCode(cs, 1))
+    check("Sxyz" == "SKISxyz".calcCLCode(cs, 2))
+    check("xz(yz)" == "SKISxyz".calcCLCode(cs, 3))
+    check("xz(yz)" == "SKISxyz".calcCLCode(cs, 4))
+    check("xz(yz)" == "SKISxyz".calcCLCode(cs))
+    check("xz(yz)A" == "SKISxyzA".calcCLCode(cs))
+    check("zA((yz)A)" == "SKISSyzA".calcCLCode(cs))
   test "未定義コンビネータならそのまま返す":
     check("xyz" == "xyz".calcCLCode(cs))
+  test "空文字のときは空文字を返す":
+    check("" == "".calcCLCode(cs))

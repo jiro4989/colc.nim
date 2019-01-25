@@ -50,6 +50,9 @@ proc takeCombinator(code: string, cs: openArray[Combinator]): tuple[combinator: 
   return (pref, args, code.substr joined.len)
 
 proc calcFormat(co: Combinator, args: openArray[string]): string =
+  if args.len < co.argsCount:
+    return co.name & args.join("")
+
   result = co.format
   for i in 0..<co.argsCount:
     let f = "{" & $i & "}"
@@ -62,13 +65,13 @@ proc calcCLCode1Time(code: string, cs: openArray[Combinator]): string =
   if matched.len < 1:
     return code
   let co = matched[0]
-  result = co.calcFormat coTuple.args
+  result = co.calcFormat(coTuple.args) & coTuple.suffix
 
 proc calcCLCode*(code: string, cs: openArray[Combinator], n: int = -1): string =
   var m = n
   if m == 0:
     return code
-  if not m == -1:
+  if -1 < m:
     dec m
   let ret = code.calcCLCode1Time cs
   if code == ret:
