@@ -1,10 +1,5 @@
+import combinator as comb
 import dom
-import combinator
-
-let
-    inputCLCode = document.getElementById("inputCLCode")
-    executeCalcButton = document.getElementById("executeCalcButton")
-    resultArea = document.getElementById("resultArea").TextAreaElement
 
 let cs = [
     Combinator(name:"S", argsCount:3, format:"{0}{2}({1}{2})"),
@@ -12,11 +7,5 @@ let cs = [
     Combinator(name:"I", argsCount:1, format:"{0}"),
     ]
 
-proc getTextValue(id: cstring): cstring {.importc.}
-
-proc calc(e: Event) {.exportc.} =
-    let clcode = $"inputCLCode".getTextValue
-    let calcResult = clcode.takePrefixCombinator(cs)
-    resultArea.value = calcResult
-
-executeCalcButton.onclick = calc
+proc calcCLCode(code: cstring): cstring {.exportc.} =
+  return comb.calcCLCode($code, cs, -1)
