@@ -6,6 +6,9 @@ type Combinator* = object
   format*: string
 
 proc takeBracketCombinator(code: string): string =
+  ## 先頭の括弧"()"で括られた文字列を返す。
+  ## このプロシージャ自体は括弧の整合性をチェックしないので
+  ## 閉じ括弧が不足している場合などのチェックは呼び出し元で実施すること。
   var cnt: int
   for c in code:
     result.add c
@@ -19,6 +22,10 @@ proc takeBracketCombinator(code: string): string =
       break
       
 proc takePrefixCombinator(code: string, cs: openArray[Combinator]): string =
+  ## 先頭のコンビネータを返す。
+  ## 先頭の文字列が括弧始まりの場合は括弧で括られたコンビネータを返す。
+  ## そうでなければ、定義済みコンビネータ(cs)の内、マッチするものを返す。
+  ## それらのいずれでもなければ、1文字返す。
   if code.len <= 0:
     return ""
   if code.startsWith "(":
@@ -29,6 +36,8 @@ proc takePrefixCombinator(code: string, cs: openArray[Combinator]): string =
   return $code[0]
 
 proc takeCombinator(code: string, cs: openArray[Combinator]): tuple[combinator: string, args: seq[string], suffix: string] =
+  ## 先頭コンビネータ、先頭コンビネータが必要とする引数コンビネータのリスト、余りを返す。
+  ## 定義済みコンビネータとマッチしなければ引数リストに空を返す。
   let
     pref = code.takePrefixCombinator cs
     matched = cs.filterIt(it.name == pref)
@@ -50,6 +59,8 @@ proc takeCombinator(code: string, cs: openArray[Combinator]): tuple[combinator: 
   return (pref, args, code.substr joined.len)
 
 proc calcFormat(co: Combinator, args: openArray[string]): string =
+  ## コンビネータの変換書式に、引数を適用して返す。
+  ## 引数が不足した場合は、コンビネータ名と引数を結合して返す。
   if args.len < co.argsCount:
     return co.name & args.join("")
 
@@ -59,6 +70,8 @@ proc calcFormat(co: Combinator, args: openArray[string]): string =
     result = result.replace(f, args[i])
 
 proc calcCLCode1Time(code: string, cs: openArray[Combinator]): string =
+  ## 一度だけコンビネータを計算する。
+  ## 計算できなかった場合は、計算対象のコードをそのまま返す。
   let
     coTuple = code.takeCombinator cs
     matched = cs.filterIt(it.name == coTuple.combinator)
@@ -68,6 +81,9 @@ proc calcCLCode1Time(code: string, cs: openArray[Combinator]): string =
   result = co.calcFormat(coTuple.args) & coTuple.suffix
 
 proc calcCLCode*(code: string, cs: openArray[Combinator], n: int = -1): string =
+  ## 計算不能になるまでコンビネータ文字列を計算して返す。
+  ## 計算不能、とは計算前と計算後の結果が一致する場合、または
+  ## 指定した計算回数(n)分計算をした場合を指す。
   var m = n
   if m == 0:
     return code
