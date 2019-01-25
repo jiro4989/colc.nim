@@ -9,13 +9,12 @@ proc takeBracketCombinator(code: string): string =
   var cnt: int
   for c in code:
     result.add c
+
     case c
-    of '(':
-      inc cnt
-    of ')':
-      dec cnt
-    else:
-      discard
+    of '(': inc cnt
+    of ')': dec cnt
+    else: discard
+
     if cnt <= 0:
       break
       
