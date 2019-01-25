@@ -19,7 +19,7 @@ proc takeBracketCombinator(code: string): string =
     if cnt <= 0:
       break
       
-proc takePrefixCombinator*(code: string, cs: openArray[Combinator]): string =
+proc takePrefixCombinator(code: string, cs: openArray[Combinator]): string =
   if code.len <= 0:
     return ""
   if code.startsWith "(":
