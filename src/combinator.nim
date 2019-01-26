@@ -96,3 +96,19 @@ proc calcCLCode*(code: string, cs: openArray[Combinator], n: int = -1): string =
   if code == ret:
     return code
   result = ret.calcCLCode(cs, m)
+
+proc calcCLCodeAndResults*(code: string, cs: openArray[Combinator], results: seq[string] = @[], n: int = -1): seq[string] =
+  ## 計算不能になるまでコンビネータ文字列を計算して、計算過程とともに返す。
+  ## 計算不能、とは計算前と計算後の結果が一致する場合、または
+  ## 指定した計算回数(n)分計算をした場合を指す。
+  var m = n
+  if m == 0:
+    return results
+  if -1 < m:
+    dec m
+  let ret = code.calcCLCode1Time cs
+  if code == ret:
+    return results
+  var nr = results
+  nr.add ret
+  result = ret.calcCLCodeAndResults(cs, nr, m)

@@ -12,6 +12,9 @@ if (typeof Uint16Array === 'undefined') Uint16Array = Array;
 if (typeof Uint32Array === 'undefined') Uint32Array = Array;
 if (typeof Float32Array === 'undefined') Float32Array = Array;
 if (typeof Float64Array === 'undefined') Float64Array = Array;
+var NTI131428 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
+var NTI128547 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
+var NTI128528 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
 var NTI128139 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
 var NTI128137 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
 var NTI128267 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
@@ -80,6 +83,9 @@ var NNI128137 = {kind: 2, len: 3, offset: 0, typ: null, name: null, sons: [{kind
 {kind: 1, offset: "Field1", len: 0, typ: NTI128139, name: "Field1", sons: null}, 
 {kind: 1, offset: "Field2", len: 0, typ: NTI138, name: "Field2", sons: null}]};
 NTI128137.node = NNI128137;
+NTI128528.base = NTI138;
+NTI128547.base = NTI138;
+NTI131428.base = NTI140;
 
 function makeNimstrLit(c_16225) {
 		  var ln = c_16225.length;
@@ -1390,5 +1396,109 @@ function calcCLCode(code_131035) {
 	framePtr = F.prev;
 
 	return result_131036;
+
+}
+
+function calc_clcode_and_results_128523(code_128525, cs_128527, results_128544, n_128546) {
+	var result_128548 = null;
+
+	var F={procname:"combinator.calcCLCodeAndResults",prev:framePtr,filename:"combinator.nim",line:0};
+	framePtr = F;
+	BeforeRet: do {
+		F.line = 104;
+		var m_128549 = n_128546;
+		if ((m_128549 == 0)) {
+		F.line = 106;
+		result_128548 = nimCopy(null, results_128544, NTI128528);
+		break BeforeRet;
+		}
+		
+		if ((-1 < m_128549)) {
+		F.line = 108;
+		m_128549 = subInt(m_128549, 1);
+		}
+		
+		F.line = 109;
+		var ret_128561 = calc_clcode1time_128422(code_128525, cs_128527);
+		if (eqStrings(code_128525, ret_128561)) {
+		F.line = 111;
+		result_128548 = nimCopy(null, results_128544, NTI128528);
+		break BeforeRet;
+		}
+		
+		F.line = 112;
+		var nr_128564 = nimCopy(null, results_128544, NTI128528);
+		F.line = 113;
+		var Tmp1 = nimCopy(null, ret_128561, NTI138);
+		if (nr_128564 != null) { nr_128564.push(Tmp1); } else { nr_128564 = [Tmp1]; };
+		F.line = 114;
+		result_128548 = nimCopy(null, calc_clcode_and_results_128523(ret_128561, cs_128527, nr_128564, m_128549), NTI128547);
+	} while (false);
+	framePtr = F.prev;
+
+	return result_128548;
+
+}
+
+function new_seq_131423(len_131427) {
+	var result_131429 = null;
+
+	var F={procname:"newSeq.newSeq",prev:framePtr,filename:"../../../../../.choosenim/toolchains/nim-0.19.0/lib/system.nim",line:0};
+	framePtr = F;
+		F.line = 706;
+		result_131429 = new Array(len_131427); for (var i=0;i<len_131427;++i) {result_131429[i]=null;}	framePtr = F.prev;
+
+	return result_131429;
+
+}
+
+function calcCLCodeAndResults(code_131053, n_131054) {
+	var result_131056 = null;
+
+	var F={procname:"colc.calcCLCodeAndResults",prev:framePtr,filename:"colc.nim",line:0};
+	framePtr = F;
+	BeforeRet: do {
+		F.line = 14;
+		L1: do {
+			F.line = 14;
+			var HEX3Atmp_131409 = calc_clcode_and_results_128523(cstrToNimstr(code_131053), cs_131016, [], ((n_131054)|0));
+			F.line = 687;
+			var i_131413 = 0;
+			F.line = 688;
+			var result_131454 = new_seq_131423(chckRange((HEX3Atmp_131409 != null ? HEX3Atmp_131409.length : 0), 0, 2147483647));
+			L2: do {
+				F.line = 689;
+				var it_131463 = null;
+				F.line = 3822;
+				var i_131479 = 0;
+				F.line = 3823;
+				var l_131481 = (HEX3Atmp_131409 != null ? HEX3Atmp_131409.length : 0);
+				L3: do {
+					F.line = 3824;
+						L4: while (true) {
+						if (!(i_131479 < l_131481)) break L4;
+							F.line = 3825;
+							it_131463 = HEX3Atmp_131409[chckIndx(i_131479, 0, HEX3Atmp_131409.length+0-1)-0];
+							F.line = 14;
+							result_131454[chckIndx(i_131413, 0, result_131454.length+0-1)-0] = toJSStr(it_131463);
+							F.line = 691;
+							i_131413 = addInt(i_131413, 1);
+							F.line = 3826;
+							i_131479 = addInt(i_131479, 1);
+							if (!(((HEX3Atmp_131409 != null ? HEX3Atmp_131409.length : 0) == l_131481))) {
+							F.line = 3827;
+							failed_assert_impl_20481(makeNimstrLit("/home/jiro4989/.choosenim/toolchains/nim-0.19.0/lib/system.nim(3827, 11) `len(a) == L` seq modified while iterating over it"));
+							}
+							
+						}
+				} while(false);
+			} while(false);
+		} while(false);
+		result_131056 = nimCopy(null, result_131454, NTI131428);
+		break BeforeRet;
+	} while (false);
+	framePtr = F.prev;
+
+	return result_131056;
 
 }

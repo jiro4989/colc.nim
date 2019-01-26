@@ -11,11 +11,37 @@
 
   <script src="static/js/colc.js"></script>
   <script>
-    function calc(inputElemID, outElemID) {
+    function calc(inputElemID, outElemID, outTableBodyID) {
       let inputElem = document.getElementById(inputElemID);
+
+      let results = calcCLCodeAndResults(inputElem.value, -1);
+      if (results.length < 1) return;
+
+      // 最後の計算結果だけ登録
+      let result = results[0];
       let outElem = document.getElementById(outElemID);
-      let result = calcCLCode(inputElem.value);
       outElem.innerHTML = result;
+
+      let outTable = document.getElementById(outTableBodyID);
+
+      // 計算結果の挿入前に、過去に計算してインサートした結果を削除
+      let rows = outTable.childNodes;
+      for (let i=0; i<rows.length; i++) {
+        outTable.removeChild(rows[i]);
+      }
+
+      // 計算結果をテーブルに挿入
+      for (let i=0; i<results.length; i++) {
+        let row = outTable.insertRow(-1);
+
+        let noTd = document.createElement("td");
+        noTd.innerHTML = (i+1);
+        row.appendChild(noTd);
+
+        let resultTd = document.createElement("td");
+        resultTd.innerHTML = results[i];
+        row.appendChild(resultTd);
+      }
     }
 
     function keyPress() {
@@ -39,9 +65,18 @@
           autofocus="true">
         <label for="inputCLCode">Input combinator codes</label>
       </div>
-      <a id="calcButton" class="waves-effect waves-light btn col" onclick="calc('inputCLCode', 'resultArea');"><i class="material-icons right">send</i>Calculate</a>
+      <a id="calcButton" class="waves-effect waves-light btn col" onclick="calc('inputCLCode', 'resultArea', 'resultTableBody');"><i class="material-icons right">send</i>Calculate</a>
     </div>
     <textarea id="resultArea" class="materialize-textarea" readonly></textarea>
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody id="resultTableBody"></tbody>
+    </table>
     <hr>
     <span>See also:</span>
     <ul>

@@ -87,3 +87,14 @@ suite "calcCLCode":
     check("xyz" == "xyz".calcCLCode(cs))
   test "空文字のときは空文字を返す":
    check("" == "".calcCLCode(cs))
+
+suite "calcCLCodeAndResults":
+  test "2回目以降も計算される":
+    check(@["KS(IS)xyz"] == "SKISxyz".calcCLCodeAndResults(cs, n = 1))
+    check(@["KS(IS)xyz", "Sxyz"] == "SKISxyz".calcCLCodeAndResults(cs, n = 2))
+    check(@["KS(IS)xyz", "Sxyz", "xz(yz)"] == "SKISxyz".calcCLCodeAndResults(cs, n = 3))
+    check(@["KS(IS)xyz", "Sxyz", "xz(yz)"] == "SKISxyz".calcCLCodeAndResults(cs))
+  test "計算不可のときは空を返す":
+    let empty: seq[string] = @[]
+    check(empty == "xyz".calcCLCodeAndResults(cs))
+    check(empty == "Sxyz".calcCLCodeAndResults(cs, n = 0))
