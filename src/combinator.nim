@@ -1,6 +1,6 @@
 import strutils, sequtils
 
-type Combinator* = object
+type Combinator* = ref object
   ## コンビネータ
   name*: string     ## コンビネータの名前
   argsCount*: int   ## コンビネータが必要とする引数の数
@@ -50,6 +50,8 @@ proc takeCombinator(code: string, cs: openArray[Combinator]): tuple[combinator: 
     code2 = code[pref.len .. code.len-1]
     args: seq[string] = @[]
   for i in 1..co.argsCount:
+    if code2 == "":
+      break
     let c = code2.takePrefixCombinator cs
     if c == "":
       return (pref, @[], code2.substr pref.len)
