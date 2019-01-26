@@ -29,21 +29,19 @@
 <body>
   <div class="container">
     <header>
-      <nav class="top-nav">
-        <div class="container">
-          <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Combinator Logic Calculator</a>
-          </div>
-        </div>
-      </nav>
+      <div class="container">
+        <h1 class="teal-text text-lighten-2">Combinator Logic Calculator</h1>
+      </div>
+      <hr>
     </header>
 
     <div class="row">
       <div class="input-field s6">
-        <input placeholder="Examples: Sxyz" id="inputCLCode" type="text" class="validate" onkeypress="keyPress();">
+        <input placeholder="Examples: Sxyz" id="inputCLCode" type="text" class="validate" onkeypress="keyPress();" autofocus="true">
         <label for="inputCLCode">Input combinator codes</label>
       </div>
-      <a id="calcButton" class="waves-effect waves-light btn col s2" onclick="calc('inputCLCode', 'resultArea');"><i class="material-icons right">send</i>実行</a>
+      <a id="calcButton" class="waves-effect waves-light btn col s2" onclick="calc('inputCLCode', 'resultArea');"><i
+          class="material-icons right">send</i>Calculate</a>
     </div>
     <textarea id="resultArea" rows="40" cols="100"></textarea>
   </div>
