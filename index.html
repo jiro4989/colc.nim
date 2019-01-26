@@ -25,9 +25,8 @@
       let outTable = document.getElementById(outTableBodyID);
 
       // 計算結果の挿入前に、過去に計算してインサートした結果を削除
-      let rows = outTable.childNodes;
-      for (let i=0; i<rows.length; i++) {
-        outTable.removeChild(rows[i]);
+      while (outTable.firstChild) {
+        outTable.removeChild(outTable.firstChild);
       }
 
       // 計算結果をテーブルに挿入
@@ -65,7 +64,8 @@
           autofocus="true">
         <label for="inputCLCode">Input combinator codes</label>
       </div>
-      <a id="calcButton" class="waves-effect waves-light btn col" onclick="calc('inputCLCode', 'resultArea', 'resultTableBody');"><i class="material-icons right">send</i>Calculate</a>
+      <a id="calcButton" class="waves-effect waves-light btn col" onclick="calc('inputCLCode', 'resultArea', 'resultTableBody');"><i
+          class="material-icons right">send</i>Calculate</a>
     </div>
     <textarea id="resultArea" class="materialize-textarea" readonly></textarea>
     <table class="striped">
