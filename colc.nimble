@@ -41,9 +41,11 @@ task archive, "配布用に圧縮する":
     exec &"tar czf {pack}.tar.gz {pack}"
 
 task release, "GitHubにリリースする":
+  exec "nimble test"
   exec "hub checkout gh-pages"
   exec "hub merge master"
   exec "hub push"
+  exec "hub checkout master"
   #exec "nimble test"
   #exec "nimble archive"
   #exec &"ghr v{version} {distDir}/"
