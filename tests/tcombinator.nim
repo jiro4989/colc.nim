@@ -20,6 +20,9 @@ suite "takePrefixCombinator":
 suite "takeBracketCombinator":
   test "括弧で括られた文字を返す":
     check("(SKI)" == "(SKI)xyz".takeBracketCombinator)
+  test "ネストした括弧で括られている場合は、一番外の括弧で返す":
+    check("(ABC(D))" == "(ABC(D))xyz".takeBracketCombinator)
+    check("((D)ABC)" == "((D)ABC)xyz".takeBracketCombinator)
   test "括弧閉じが不足する場合は、全部返す":
     check("(SKIxyz" == "(SKIxyz".takeBracketCombinator)
     check("((SKIxyz" == "((SKIxyz".takeBracketCombinator)
