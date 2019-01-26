@@ -29,13 +29,14 @@ suite "takeBracketCombinator":
 
 suite "takeCombinator":
   test "コンビネータと引数と残りを返す":
-    check((combinator: "S", args: @["x", "y", "z"], suffix: "") == "Sxyz".takeCombinator(cs))
+    check((combinator: "S", args: @["x", "y", "z"], suffix: "A") == "SxyzA".takeCombinator(cs))
+  test "引数コンビネータが括弧に括られている場合は括弧ごと引数とする":
+    check((combinator: "S", args: @["(x)", "(xy)", "(xyz)"], suffix: "(ABC)") == "S(x)(xy)(xyz)(ABC)".takeCombinator(cs))
   test "先頭のコンビネータが渡したコンビネータに存在しなければ、すべて空になる":
     let args: seq[string] = @[]
     check((combinator: "", args: args, suffix: "") == "abcdefg".takeCombinator(cs))
   test "引数不足ならargsは空":
-    let args: seq[string] = @[]
-    check((combinator: "S", args: args, suffix: "") == "Sxy".takeCombinator(cs))
+    check((combinator: "S", args: @["x", "y"], suffix: "") == "Sxy".takeCombinator(cs))
 
 suite "calcFormat":
   test "置換処理を実行する":
@@ -49,6 +50,8 @@ suite "calcFormat":
 suite "calcCLCode1Time":
   test "1回だけ計算する":
     check("xz(yz)" == "Sxyz".calcCLCode1Time(cs))
+  test "これ以上計算できない場合はそのまま返す":
+    check("SS(((SS)S)S)" == "SS(((SS)S)S)".calcCLCode1Time(cs))
   test "余っていた引数は末尾に付与される":
     check("xz(yz)A" == "SxyzA".calcCLCode1Time(cs))
   test "2回目は計算されない":
@@ -60,6 +63,7 @@ suite "calcCLCode":
   test "計算する":
     check("xz(yz)" == "Sxyz".calcCLCode(cs))
     check("xz(yz)A" == "SxyzA".calcCLCode(cs))
+    check("(x)(xyz)((xy)(xyz))" == "S(x)(xy)(xyz)".calcCLCode(cs))
   test "回数指定で計算する":
     check("KI(II)" == "SKII".calcCLCode(cs, 1))
     check("I" == "SKII".calcCLCode(cs, 2))
@@ -74,7 +78,12 @@ suite "calcCLCode":
     check("xz(yz)" == "SKISxyz".calcCLCode(cs))
     check("xz(yz)A" == "SKISxyzA".calcCLCode(cs))
     check("zA((yz)A)" == "SKISSyzA".calcCLCode(cs))
+  test "SSSSSS":
+    check("SS(SS)SS" == "SSSSSS".calcCLCode(cs, 1))
+    check("SS((SS)S)S" == "SSSSSS".calcCLCode(cs, 2))
+    check("SS(((SS)S)S)" == "SSSSSS".calcCLCode(cs, 3))
+    check("SS(((SS)S)S)" == "SSSSSS".calcCLCode(cs))
   test "未定義コンビネータならそのまま返す":
     check("xyz" == "xyz".calcCLCode(cs))
   test "空文字のときは空文字を返す":
-    check("" == "".calcCLCode(cs))
+   check("" == "".calcCLCode(cs))
