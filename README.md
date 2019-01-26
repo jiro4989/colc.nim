@@ -1,6 +1,6 @@
 # colc.nim
 
-Combinator Logic計算機
+コンビネータ論理計算機
 
 ## 開発環境
 

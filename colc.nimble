@@ -3,7 +3,7 @@
 packageName = "colc"
 version     = "1.0.0"
 author      = "jiro4989"
-description = "Combinator Logic Calc"
+description = "Combinatory Logic Calc"
 license     = "MIT"
 srcDir      = "src"
 binDir      = "bin"
