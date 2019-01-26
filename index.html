@@ -17,6 +17,12 @@
       let result = calcCLCode(inputElem.value);
       outElem.innerHTML = result;
     }
+
+    function keyPress() {
+      if (event.keyCode == 13) {
+        document.getElementById("calcButton").click();
+      }
+    }
   </script>
 </head>
 
@@ -34,10 +40,10 @@
 
     <div class="row">
       <div class="input-field col s6">
-        <input placeholder="Examples: Sxyz" id="inputCLCode" type="text" class="validate">
+        <input placeholder="Examples: Sxyz" id="inputCLCode" type="text" class="validate" onkeypress="keyPress();">
         <label for="inputCLCode">Input combinator codes</label>
       </div>
-      <a class="waves-effect waves-light btn col s2" onclick="calc('inputCLCode', 'resultArea');"><i class="material-icons right">send</i>実行</a>
+      <a id="calcButton" class="waves-effect waves-light btn col s2" onclick="calc('inputCLCode', 'resultArea');"><i class="material-icons right">send</i>実行</a>
     </div>
     <textarea id="resultArea" rows="40" cols="100"></textarea>
   </div>
