@@ -42,6 +42,7 @@ task archive, "配布用に圧縮する":
 
 task release, "GitHubにリリースする":
   exec "nimble test"
+  exec "nimble buildjs"
   exec "hub checkout gh-pages"
   exec "hub merge master"
   exec "hub push"
