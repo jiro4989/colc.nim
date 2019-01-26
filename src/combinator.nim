@@ -1,9 +1,10 @@
 import strutils, sequtils
 
 type Combinator* = object
-  name*: string
-  argsCount*: int
-  format*: string
+  ## コンビネータ
+  name*: string     ## コンビネータの名前
+  argsCount*: int   ## コンビネータが必要とする引数の数
+  format*: string   ## コンビネータの変換書式。"{0}{1}"という具合に書く。
 
 proc takeBracketCombinator(code: string): string =
   ## 先頭の括弧"()"で括られた文字列を返す。
