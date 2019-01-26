@@ -1,23 +1,48 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8">
-    <title>colc</title>
-    <script src="static/js/colc.js"></script>
-    <script>
-      function calc(inputElemID, outElemID) {
-        let inputElem = document.getElementById(inputElemID);
-        let outElem = document.getElementById(outElemID);
-        let result = calcCLCode(inputElem.value);
-        outElem.innerHTML = result;
-      }
-    </script>
-  </head>
-  <body>
-    <ul>
-      <li> <input id="inputCLCode" type="text" value="" /> </li>
-      <li> <input id="executeCalcButton" type="button" value="実行" onclick="calc('inputCLCode', 'resultArea');" /> </li>
-      <li> <textarea id="resultArea" rows="40" cols="100"></textarea> </li>
-    </ul>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <title>colc</title>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css" media="screen,projection" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <script src="static/js/colc.js"></script>
+  <script>
+    function calc(inputElemID, outElemID) {
+      let inputElem = document.getElementById(inputElemID);
+      let outElem = document.getElementById(outElemID);
+      let result = calcCLCode(inputElem.value);
+      outElem.innerHTML = result;
+    }
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <nav class="top-nav">
+        <div class="container">
+          <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Combinator Logic Calculator</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="row">
+      <div class="input-field col s6">
+        <input placeholder="Examples: Sxyz" id="inputCLCode" type="text" class="validate">
+        <label for="inputCLCode">Input combinator codes</label>
+      </div>
+      <a class="waves-effect waves-light btn col s2" onclick="calc('inputCLCode', 'resultArea');"><i class="material-icons right">send</i>実行</a>
+    </div>
+    <textarea id="resultArea" rows="40" cols="100"></textarea>
+  </div>
+
+  <script type="text/javascript" src="static/js/materialize.min.js"></script>
+</body>
+
 </html>

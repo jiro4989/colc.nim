@@ -681,10 +681,10 @@ function take_bracket_combinator_128019(code_128021) {
 
 	var F={procname:"combinator.takeBracketCombinator",prev:framePtr,filename:"combinator.nim",line:0};
 	framePtr = F;
-		F.line = 9;
+		F.line = 13;
 		var cnt_128023 = 0;
 		L1: do {
-			F.line = 10;
+			F.line = 14;
 			var c_128025 = 0;
 			F.line = 3840;
 			var i_128047 = 0;
@@ -696,23 +696,23 @@ function take_bracket_combinator_128019(code_128021) {
 					if (!(i_128047 < l_128049)) break L3;
 						F.line = 3843;
 						c_128025 = code_128021[chckIndx(i_128047, 0, code_128021.length+0-1)-0];
-						F.line = 11;
+						F.line = 15;
 						if (result_128022 != null) { addChar(result_128022, c_128025); } else { result_128022 = [c_128025]; };
-						F.line = 13;
+						F.line = 17;
 						switch (c_128025) {
 						case 40:
-							F.line = 14;
+							F.line = 18;
 							cnt_128023 = addInt(cnt_128023, 1);
 							break;
 						case 41:
-							F.line = 15;
+							F.line = 19;
 							cnt_128023 = subInt(cnt_128023, 1);
 							break;
 						default: 
 							break;
 						}
 						if ((cnt_128023 <= 0)) {
-						F.line = 19;
+						F.line = 23;
 						break L1;
 						}
 						
@@ -739,19 +739,19 @@ function take_prefix_combinator_128063(code_128065, cs_128067) {
 	framePtr = F;
 	BeforeRet: do {
 		if (((code_128065 != null ? code_128065.length : 0) <= 0)) {
-		F.line = 23;
+		F.line = 31;
 		result_128068 = nimCopy(null, [], NTI138);
 		break BeforeRet;
 		}
 		
 		if (nsuStartsWith(code_128065, makeNimstrLit("("))) {
-		F.line = 25;
+		F.line = 33;
 		result_128068 = nimCopy(null, take_bracket_combinator_128019(code_128065), NTI138);
 		break BeforeRet;
 		}
 		
 		L1: do {
-			F.line = 26;
+			F.line = 34;
 			var c_128107 = {name: null, argsCount: 0, format: null};
 			F.line = 2159;
 			var i_128111 = 0;
@@ -762,7 +762,7 @@ function take_prefix_combinator_128063(code_128065, cs_128067) {
 						F.line = 2161;
 						nimCopy(c_128107, cs_128067[chckIndx(i_128111, 0, cs_128067.length+0-1)-0], NTI128015);
 						if (nsuStartsWith(code_128065, c_128107.name)) {
-						F.line = 28;
+						F.line = 36;
 						result_128068 = nimCopy(null, c_128107.name, NTI138);
 						break BeforeRet;
 						}
@@ -772,7 +772,7 @@ function take_prefix_combinator_128063(code_128065, cs_128067) {
 					}
 			} while(false);
 		} while(false);
-		F.line = 29;
+		F.line = 37;
 		result_128068 = nimCopy(null, nimCharToStr(code_128065[chckIndx(0, 0, code_128065.length+0-1)-0]), NTI138);
 		break BeforeRet;
 	} while (false);
@@ -958,9 +958,9 @@ function take_combinator_128125(code_128127, cs_128129) {
 	var F={procname:"combinator.takeCombinator",prev:framePtr,filename:"combinator.nim",line:0};
 	framePtr = F;
 	BeforeRet: do {
-		F.line = 33;
+		F.line = 43;
 		var pref_128136 = take_prefix_combinator_128063(code_128127, cs_128129);
-		F.line = 34;
+		F.line = 44;
 		F.line = 419;
 		var result_128172 = new_seq_128141(0);
 		L1: do {
@@ -987,22 +987,22 @@ function take_combinator_128125(code_128127, cs_128129) {
 		} while(false);
 		var matched_128193 = nimCopy(null, result_128172, NTI128146);
 		if (((matched_128193 != null ? matched_128193.length : 0) <= 0)) {
-		F.line = 36;
+		F.line = 46;
 		break BeforeRet;
 		}
 		
-		F.line = 38;
+		F.line = 48;
 		var co_128201 = nimCopy(null, matched_128193[chckIndx(0, 0, matched_128193.length+0-1)-0], NTI128015);
-		F.line = 40;
+		F.line = 50;
 		var code2_128244 = HEX5BHEX5D_45874(code_128127, HEX2EHEX2E_45828((pref_128136 != null ? pref_128136.length : 0), subInt((code_128127 != null ? code_128127.length : 0), 1)));
-		F.line = 41;
+		F.line = 51;
 		var args_128261 = nimCopy(null, [], NTI128260);
 		L5: do {
-			F.line = 42;
+			F.line = 52;
 			var i_128273 = 0;
 			F.line = 2016;
 			var colontmp__128351 = 0;
-			F.line = 42;
+			F.line = 52;
 			colontmp__128351 = co_128201.argsCount;
 			F.line = 2019;
 			var res_128354 = 1;
@@ -1012,27 +1012,27 @@ function take_combinator_128125(code_128127, cs_128129) {
 					if (!(res_128354 <= colontmp__128351)) break L7;
 						F.line = 2021;
 						i_128273 = res_128354;
-						F.line = 43;
+						F.line = 53;
 						var c_128274 = take_prefix_combinator_128063(code2_128244, cs_128129);
 						if (eqStrings(c_128274, [])) {
-						F.line = 45;
+						F.line = 55;
 						nimCopy(result_128135, {Field0: pref_128136, Field1: [], Field2: substr_23464(code2_128244, (pref_128136 != null ? pref_128136.length : 0))}, NTI128130);
 						break BeforeRet;
 						}
 						
-						F.line = 46;
+						F.line = 56;
 						var Tmp8 = nimCopy(null, c_128274, NTI138);
 						if (args_128261 != null) { args_128261.push(Tmp8); } else { args_128261 = [Tmp8]; };
-						F.line = 47;
+						F.line = 57;
 						code2_128244 = nimCopy(null, HEX5BHEX5D_45874(code2_128244, HEX2EHEX2E_45828((c_128274 != null ? c_128274.length : 0), subInt((code2_128244 != null ? code2_128244.length : 0), 1))), NTI138);
 						F.line = 2022;
 						res_128354 = addInt(res_128354, 1);
 					}
 			} while(false);
 		} while(false);
-		F.line = 49;
+		F.line = 59;
 		var joined_128344 = (pref_128136).concat(nsuJoinSep(args_128261, []));
-		F.line = 50;
+		F.line = 60;
 		nimCopy(result_128135, {Field0: pref_128136, Field1: args_128261, Field2: substr_23464(code_128127, (joined_128344 != null ? joined_128344.length : 0))}, NTI128130);
 		break BeforeRet;
 	} while (false);
@@ -1247,19 +1247,19 @@ function calc_format_128371(co_128373, args_128375) {
 	framePtr = F;
 	BeforeRet: do {
 		if (((args_128375 != null ? args_128375.length : 0) < co_128373.argsCount)) {
-		F.line = 54;
+		F.line = 66;
 		result_128376 = nimCopy(null, (co_128373.name).concat(nsuJoinSep(args_128375, [])), NTI138);
 		break BeforeRet;
 		}
 		
-		F.line = 56;
+		F.line = 68;
 		result_128376 = nimCopy(null, co_128373.format, NTI138);
 		L1: do {
-			F.line = 57;
+			F.line = 69;
 			var i_128392 = 0;
 			F.line = 3527;
 			var colontmp__128395 = 0;
-			F.line = 57;
+			F.line = 69;
 			colontmp__128395 = co_128373.argsCount;
 			F.line = 3528;
 			var i_128398 = 0;
@@ -1269,9 +1269,9 @@ function calc_format_128371(co_128373, args_128375) {
 					if (!(i_128398 < colontmp__128395)) break L3;
 						F.line = 3530;
 						i_128392 = i_128398;
-						F.line = 58;
+						F.line = 70;
 						var f_128393 = (makeNimstrLit("{")).concat(cstrToNimstr((i_128392)+""),makeNimstrLit("}"));
-						F.line = 59;
+						F.line = 71;
 						result_128376 = nimCopy(null, nsuReplaceStr(result_128376, f_128393, args_128375[chckIndx(i_128392, 0, args_128375.length+0-1)-0]), NTI138);
 						F.line = 3531;
 						i_128398 = addInt(i_128398, 1);
@@ -1291,9 +1291,9 @@ function calc_clcode1time_128413(code_128415, cs_128417) {
 	var F={procname:"combinator.calcCLCode1Time",prev:framePtr,filename:"combinator.nim",line:0};
 	framePtr = F;
 	BeforeRet: do {
-		F.line = 63;
+		F.line = 77;
 		var co_tuple_128419 = take_combinator_128125(code_128415, cs_128417);
-		F.line = 64;
+		F.line = 78;
 		F.line = 419;
 		var result_128431 = new_seq_128141(0);
 		L1: do {
@@ -1320,14 +1320,14 @@ function calc_clcode1time_128413(code_128415, cs_128417) {
 		} while(false);
 		var matched_128452 = nimCopy(null, result_128431, NTI128146);
 		if (((matched_128452 != null ? matched_128452.length : 0) < 1)) {
-		F.line = 66;
+		F.line = 80;
 		result_128418 = nimCopy(null, code_128415, NTI138);
 		break BeforeRet;
 		}
 		
-		F.line = 67;
+		F.line = 81;
 		var co_128460 = nimCopy(null, matched_128452[chckIndx(0, 0, matched_128452.length+0-1)-0], NTI128015);
-		F.line = 68;
+		F.line = 82;
 		result_128418 = nimCopy(null, (calc_format_128371(co_128460, co_tuple_128419.Field1)).concat(co_tuple_128419.Field2), NTI138);
 	} while (false);
 	framePtr = F.prev;
@@ -1342,28 +1342,28 @@ function calc_clcode_128478(code_128480, cs_128482, n_128484) {
 	var F={procname:"combinator.calcCLCode",prev:framePtr,filename:"combinator.nim",line:0};
 	framePtr = F;
 	BeforeRet: do {
-		F.line = 71;
+		F.line = 88;
 		var m_128486 = n_128484;
 		if ((m_128486 == 0)) {
-		F.line = 73;
+		F.line = 90;
 		result_128485 = nimCopy(null, code_128480, NTI138);
 		break BeforeRet;
 		}
 		
 		if ((-1 < m_128486)) {
-		F.line = 75;
+		F.line = 92;
 		m_128486 = subInt(m_128486, 1);
 		}
 		
-		F.line = 76;
+		F.line = 93;
 		var ret_128498 = calc_clcode1time_128413(code_128480, cs_128482);
 		if (eqStrings(code_128480, ret_128498)) {
-		F.line = 78;
+		F.line = 95;
 		result_128485 = nimCopy(null, code_128480, NTI138);
 		break BeforeRet;
 		}
 		
-		F.line = 79;
+		F.line = 96;
 		result_128485 = nimCopy(null, calc_clcode_128478(ret_128498, cs_128482, m_128486), NTI138);
 	} while (false);
 	framePtr = F.prev;
