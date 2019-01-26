@@ -55,10 +55,12 @@
   <div class="container">
     <header>
       <h1 class="header center teal-text text-lighten-2">Combinatory Logic Calculator</h1>
-      <hr>
     </header>
 
-    <div class="row">
+    <hr>
+
+    <div class="section">
+      <h2>INPUT</h2>
       <div class="input-field s6">
         <input placeholder="Examples: Sxyz" id="inputCLCode" type="text" class="validate" onkeypress="keyPress();"
           autofocus="true">
@@ -67,32 +69,45 @@
       <a id="calcButton" class="waves-effect waves-light btn col" onclick="calc('inputCLCode', 'resultArea', 'resultTableBody');"><i
           class="material-icons right">send</i>Calculate</a>
     </div>
-    <textarea id="resultArea" class="materialize-textarea" readonly></textarea>
-    <table class="striped">
-      <thead>
-        <tr>
-          <th>No.</th>
-          <th>Result</th>
-        </tr>
-      </thead>
-      <tbody id="resultTableBody"></tbody>
-    </table>
+
+    <div class="section">
+      <h2>OUTPUT</h2>
+      <textarea placeholder="Result" id="resultArea" class="materialize-textarea" readonly></textarea>
+
+      <div class="section">
+        <h3>Calculation Process</h3>
+        <table class="striped">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody id="resultTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
     <hr>
-    <span>See also:</span>
-    <ul>
-      <li>
-        <a href="https://github.com/jiro4989/colc.nim">github.com/jiro4989/colc.nim</a> (this repository)
-      </li>
-      <li>
-        <a href="https://plato.stanford.edu/entries/logic-combinatory/">Combinatory Logic - Stanford Encyclopedia
-          of
-          Philosophy</a> (en)
-      </li>
-      <li>
-        <a href="https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8D%E3%83%BC%E3%82%BF%E8%AB%96%E7%90%86">コンビネータ論理
-          - Wikipedia</a> (ja)
-      </li>
-    </ul>
+
+    <footer>
+      <span>See also:</span>
+      <ul>
+        <li>
+          <a href="https://github.com/jiro4989/colc.nim">github.com/jiro4989/colc.nim</a> (this repository)
+        </li>
+        <li>
+          <a href="https://plato.stanford.edu/entries/logic-combinatory/">Combinatory Logic - Stanford Encyclopedia
+            of
+            Philosophy</a> (en)
+        </li>
+        <li>
+          <a href="https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8D%E3%83%BC%E3%82%BF%E8%AB%96%E7%90%86">コンビネータ論理
+            - Wikipedia</a> (ja)
+        </li>
+      </ul>
+      <div class="center">&copy; 次郎 (jiro) <a href="https://twitter.com/jiro_saburomaru">@jiro_saburomaru</a></div>
+    </footer>
   </div>
 
   <script type="text/javascript" src="static/js/materialize.min.js"></script>
