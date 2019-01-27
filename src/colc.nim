@@ -24,7 +24,7 @@ usage:
 
 options:
   -n --show-filename        show filename
-  -o --out-file=<outfile>   out file
+  -o --outfile=<outfile>    out file
   <file>                    target file
 
 help options:
@@ -32,29 +32,52 @@ help options:
   -v --version              show version
   """
 
-    import docopt 
+    import docopt
+    import strutils
 
     let
       args = docopt(doc, version = "v1.0.0")
       files = @(args["<file>"])
+      outfile = $args["outfile"]
     if files.len < 1:
       # stdin
       var line: string
-      while stdin.readLine line:
-        let ret = line.calcCLCode cs
-        echo ret
-    else:
-      # file
-      for f in files:
-        var fp: File
+      if outfile != "":
+        # 出力先がファイル
+        var ofp: File
         try:
-          fp = f.open FileMode.fmRead
-          var line: string
-          while fp.readLine line:
+          ofp = outfile.open FileMode.fmWrite
+          while stdin.readLine line:
             let ret = line.calcCLCode cs
-            echo ret
+            ofp.writeLine ret
         except:
           stderr.write(getCurrentExceptionMsg())
         finally:
-          if fp != nil:
-            fp.close()
+          if ofp != nil:
+            ofp.close()
+        quit 0
+
+      # 出力先が標準出力
+      while stdin.readLine line:
+        let ret = line.calcCLCode cs
+        echo ret
+      quit 0
+
+    # file
+    let showFlag = parseBool($args["show-filename"])
+    for f in files:
+      var fp: File
+      try:
+        fp = f.open FileMode.fmRead
+        var line: string
+        while fp.readLine line:
+          var ret = line.calcCLCode cs
+          # ファイル名を出力するかどうか
+          if showFlag:
+            ret = f & ":" & ret
+          echo ret
+      except:
+        stderr.write(getCurrentExceptionMsg())
+      finally:
+        if fp != nil:
+          fp.close()
