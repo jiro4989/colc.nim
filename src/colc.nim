@@ -1,5 +1,5 @@
 import combinator as comb
-import dom, sequtils
+import sequtils
 
 let cs = [
     Combinator(name:"S", argsCount:3, format:"{0}{2}({1}{2})"),
@@ -7,8 +7,11 @@ let cs = [
     Combinator(name:"I", argsCount:1, format:"{0}"),
     ]
 
-proc calcCLCode(code: cstring): cstring {.exportc.} =
-  return comb.calcCLCode($code, cs, -1)
+when defined(js):
+  proc calcCLCode(code: cstring): cstring {.exportc.} =
+    return comb.calcCLCode($code, cs, -1)
 
-proc calcCLCodeAndResults(code: cstring, n: cint): seq[cstring] {.exportc.} =
-  return comb.calcCLCodeAndResults($code, cs, n = n).mapIt(cstring(it))
+  proc calcCLCodeAndResults(code: cstring, n: cint): seq[cstring] {.exportc.} =
+    return comb.calcCLCodeAndResults($code, cs, n = n).mapIt(cstring(it))
+else:
+  echo "linux"
