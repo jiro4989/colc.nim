@@ -13,6 +13,7 @@ skipDirs    = @["tests", "util"]
 # Dependencies
 
 requires "nim >= 0.19.0"
+requires "docopt >= 0.6.7"
 
 import strformat
 
