@@ -38,7 +38,8 @@ help options:
     let
       args = docopt(doc, version = "v1.0.0")
       files = @(args["<file>"])
-      outfile = $args["outfile"]
+      outfile = if not args["--outfile"]: "" else: $args["--outfile"]
+
     if files.len < 1:
       # stdin
       var line: string
@@ -64,7 +65,7 @@ help options:
       quit 0
 
     # file
-    let showFlag = parseBool($args["show-filename"])
+    let showFlag = parseBool($args["--show-filename"])
     for f in files:
       var fp: File
       try:
