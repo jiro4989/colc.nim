@@ -33,6 +33,7 @@ help options:
   """
 
     import docopt
+    import logic
     import strutils
 
     let
@@ -40,45 +41,26 @@ help options:
       files = @(args["<file>"])
       outfile = if not args["--outfile"]: "" else: $args["--outfile"]
 
-    if files.len < 1:
-      # stdin
-      var line: string
+    # 出力先指定
+    var w: File =
       if outfile != "":
-        # 出力先がファイル
-        var ofp: File
-        try:
-          ofp = outfile.open FileMode.fmWrite
-          while stdin.readLine line:
-            let ret = line.calcCLCode cs
-            ofp.writeLine ret
-        except:
-          stderr.write(getCurrentExceptionMsg())
-        finally:
-          if ofp != nil:
-            ofp.close()
+        outfile.open FileMode.fmWrite
+      else:
+        stdout
+
+    try:
+      # 標準入力を処理
+      if files.len < 1:
+        var r = stdin
+        logic.write(r, w, cs)
         quit 0
 
-      # 出力先が標準出力
-      while stdin.readLine line:
-        let ret = line.calcCLCode cs
-        echo ret
-      quit 0
-
-    # file
-    let showFlag = parseBool($args["--show-filename"])
-    for f in files:
-      var fp: File
-      try:
-        fp = f.open FileMode.fmRead
-        var line: string
-        while fp.readLine line:
-          var ret = line.calcCLCode cs
-          # ファイル名を出力するかどうか
-          if showFlag:
-            ret = f & ":" & ret
-          echo ret
-      except:
-        stderr.write(getCurrentExceptionMsg())
-      finally:
-        if fp != nil:
-          fp.close()
+      # ファイル入力を処理
+      let showFlag = parseBool($args["--show-filename"])
+      for f in files:
+        logic.write(f, w, cs, showFlag)
+    except:
+      stderr.write(getCurrentExceptionMsg())
+    finally:
+      if w != nil:
+        w.close()
