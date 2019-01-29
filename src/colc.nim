@@ -52,13 +52,13 @@ help options:
       # 標準入力を処理
       if files.len < 1:
         var r = stdin
-        logic.write(r, w, cs)
+        logic.execute(r, w, cs)
         quit 0
 
       # ファイル入力を処理
       let showFlag = parseBool($args["--show-filename"])
       for f in files:
-        logic.write(f, w, cs, showFlag)
+        logic.execute(f, w, cs, showFlag)
     except:
       stderr.write(getCurrentExceptionMsg())
     finally:

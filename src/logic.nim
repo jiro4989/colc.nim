@@ -1,6 +1,6 @@
 import combinator
 
-proc write*(r: File, w: var File, cs: openArray[Combinator]) =
+proc execute*(r: File, w: var File, cs: openArray[Combinator]) =
   try:
     var line: string
     while r.readLine line:
@@ -12,7 +12,7 @@ proc write*(r: File, w: var File, cs: openArray[Combinator]) =
     if w != nil:
       w.close()
 
-proc write*(f: string, w: var File, cs: openArray[Combinator], showFlag: bool) =
+proc execute*(f: string, w: var File, cs: openArray[Combinator], showFlag: bool) =
   var r: File
   try:
     r = f.open FileMode.fmRead
