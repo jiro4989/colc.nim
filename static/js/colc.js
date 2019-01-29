@@ -12,7 +12,7 @@ if (typeof Uint16Array === 'undefined') Uint16Array = Array;
 if (typeof Uint32Array === 'undefined') Uint32Array = Array;
 if (typeof Float32Array === 'undefined') Float32Array = Array;
 if (typeof Float64Array === 'undefined') Float64Array = Array;
-var NTI129428 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
+var NTI129628 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
 var NTI128547 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
 var NTI128528 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
 var NTI128139 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
@@ -85,7 +85,7 @@ var NNI128137 = {kind: 2, len: 3, offset: 0, typ: null, name: null, sons: [{kind
 NTI128137.node = NNI128137;
 NTI128528.base = NTI138;
 NTI128547.base = NTI138;
-NTI129428.base = NTI140;
+NTI129628.base = NTI140;
 
 function makeNimstrLit(c_16225) {
 		  var ln = c_16225.length;
@@ -1382,19 +1382,19 @@ function calc_clcode_128487(code_128489, cs_128491, n_128493) {
 
 }
 
-function calcCLCode(code_129033) {
-	var result_129034 = null;
+function calcCLCode(code_129203) {
+	var result_129204 = null;
 
 	var F={procname:"colc.calcCLCode",prev:framePtr,filename:"colc.nim",line:0};
 	framePtr = F;
 	BeforeRet: do {
-		F.line = 12;
-		result_129034 = toJSStr(calc_clcode_128487(cstrToNimstr(code_129033), cs_129030, -1));
+		F.line = 13;
+		result_129204 = toJSStr(calc_clcode_128487(cstrToNimstr(code_129203), cs_129030, -1));
 		break BeforeRet;
 	} while (false);
 	framePtr = F.prev;
 
-	return result_129034;
+	return result_129204;
 
 }
 
@@ -1439,52 +1439,52 @@ function calc_clcode_and_results_128523(code_128525, cs_128527, results_128544, 
 
 }
 
-function new_seq_129423(len_129427) {
-	var result_129429 = null;
+function new_seq_129623(len_129627) {
+	var result_129629 = null;
 
 	var F={procname:"newSeq.newSeq",prev:framePtr,filename:"../../../../../.choosenim/toolchains/nim-0.19.0/lib/system.nim",line:0};
 	framePtr = F;
 		F.line = 706;
-		result_129429 = new Array(len_129427); for (var i=0;i<len_129427;++i) {result_129429[i]=null;}	framePtr = F.prev;
+		result_129629 = new Array(len_129627); for (var i=0;i<len_129627;++i) {result_129629[i]=null;}	framePtr = F.prev;
 
-	return result_129429;
+	return result_129629;
 
 }
 
-function calcCLCodeAndResults(code_129051, n_129052) {
-	var result_129054 = null;
+function calcCLCodeAndResults(code_129221, n_129222) {
+	var result_129224 = null;
 
 	var F={procname:"colc.calcCLCodeAndResults",prev:framePtr,filename:"colc.nim",line:0};
 	framePtr = F;
 	BeforeRet: do {
-		F.line = 15;
+		F.line = 16;
 		L1: do {
-			F.line = 15;
-			var HEX3Atmp_129409 = calc_clcode_and_results_128523(cstrToNimstr(code_129051), cs_129030, [], ((n_129052)|0));
+			F.line = 16;
+			var HEX3Atmp_129609 = calc_clcode_and_results_128523(cstrToNimstr(code_129221), cs_129030, [], ((n_129222)|0));
 			F.line = 687;
-			var i_129413 = 0;
+			var i_129613 = 0;
 			F.line = 688;
-			var result_129454 = new_seq_129423(chckRange((HEX3Atmp_129409 != null ? HEX3Atmp_129409.length : 0), 0, 2147483647));
+			var result_129654 = new_seq_129623(chckRange((HEX3Atmp_129609 != null ? HEX3Atmp_129609.length : 0), 0, 2147483647));
 			L2: do {
 				F.line = 689;
-				var it_129463 = null;
+				var it_129663 = null;
 				F.line = 3822;
-				var i_129479 = 0;
+				var i_129679 = 0;
 				F.line = 3823;
-				var l_129481 = (HEX3Atmp_129409 != null ? HEX3Atmp_129409.length : 0);
+				var l_129681 = (HEX3Atmp_129609 != null ? HEX3Atmp_129609.length : 0);
 				L3: do {
 					F.line = 3824;
 						L4: while (true) {
-						if (!(i_129479 < l_129481)) break L4;
+						if (!(i_129679 < l_129681)) break L4;
 							F.line = 3825;
-							it_129463 = HEX3Atmp_129409[chckIndx(i_129479, 0, HEX3Atmp_129409.length+0-1)-0];
-							F.line = 15;
-							result_129454[chckIndx(i_129413, 0, result_129454.length+0-1)-0] = toJSStr(it_129463);
+							it_129663 = HEX3Atmp_129609[chckIndx(i_129679, 0, HEX3Atmp_129609.length+0-1)-0];
+							F.line = 16;
+							result_129654[chckIndx(i_129613, 0, result_129654.length+0-1)-0] = toJSStr(it_129663);
 							F.line = 691;
-							i_129413 = addInt(i_129413, 1);
+							i_129613 = addInt(i_129613, 1);
 							F.line = 3826;
-							i_129479 = addInt(i_129479, 1);
-							if (!(((HEX3Atmp_129409 != null ? HEX3Atmp_129409.length : 0) == l_129481))) {
+							i_129679 = addInt(i_129679, 1);
+							if (!(((HEX3Atmp_129609 != null ? HEX3Atmp_129609.length : 0) == l_129681))) {
 							F.line = 3827;
 							failed_assert_impl_20481(makeNimstrLit("/home/jiro4989/.choosenim/toolchains/nim-0.19.0/lib/system.nim(3827, 11) `len(a) == L` seq modified while iterating over it"));
 							}
@@ -1493,12 +1493,12 @@ function calcCLCodeAndResults(code_129051, n_129052) {
 				} while(false);
 			} while(false);
 		} while(false);
-		result_129054 = nimCopy(null, result_129454, NTI129428);
+		result_129224 = nimCopy(null, result_129654, NTI129628);
 		break BeforeRet;
 	} while (false);
 	framePtr = F.prev;
 
-	return result_129054;
+	return result_129224;
 
 }
 var cs_129030 = nimCopy(null, [{name: makeNimstrLit("S"), argsCount: 3, format: makeNimstrLit("{0}{2}({1}{2})")}, {name: makeNimstrLit("K"), argsCount: 2, format: makeNimstrLit("{0}")}, {name: makeNimstrLit("I"), argsCount: 1, format: makeNimstrLit("{0}")}], NTI129028);
